@@ -50,6 +50,10 @@
 			page principale
 		-->	
 		<div data-role="page" id="game">
+			<!--
+				le bouton menu
+			-->
+			<div class="title" style="background: none; position: fixed; right: 0; top: 0; height: 36px; width: 36px; z-index: 999"><a id="menub"><div class="icons bars icons-size" ></div></a></div>			
 
 			<!--
 				Le titre
@@ -59,10 +63,6 @@
 				Le jeu Simon
 			-->
 			<div id="simon_menu"><div id="simon_menu_front"><div id="simon_menu_go">&nbsp;</div></div></div>
-			<!--
-				L'ancre du menu
-			-->
-			<div style="position: fixed; bottom: 0; width: 100%; height: 2px; z-index: 285;" onmouseover="closeMenu();"></div>
 		</div>
 
 		<!--
@@ -147,7 +147,7 @@
 		<div data-role="page" id="aide-1" style="background: #fff; color: #000">
 			<div class="help-content">
 				<div class="help-title" style="position: fixed; top:0;">
-					drkSimon v1.0.2<br/>
+					drkSimon v1.0.3<br/>
 					<span class="help-subtitle">Le c&eacute;l&egrave;bre jeu des 80's</span>
 				</div>
 				<div class="help-text" style="position: static;">

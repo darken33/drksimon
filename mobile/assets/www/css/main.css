@@ -195,10 +195,12 @@ table.highscore td {
 .icons {
 	background-image:url('../images/icons-36-white.png');
 	background-repeat:no-repeat;
+	opacity: 0.8;	
 }
 .icons-black {
 	background-image:url('../images/icons-36-black.png');
 	background-repeat:no-repeat;
+	opacity: 0.8;	
 }
 .icons-size {
 	width: 36px;
@@ -214,6 +216,9 @@ table.highscore td {
 .help {
 	background-position: -1080px;
 } 
+.bars {
+	background-position: -864px;
+}
 .new {
 	background-position: -936px;
 } 
@@ -516,6 +521,9 @@ table.highscore td {
 	.help {
 		background-position: -540px;
 	} 
+	.bars {
+		background-position: -436px;
+	}
 	.new {
 		background-position: -468px;
 	} 

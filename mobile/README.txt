@@ -1,4 +1,4 @@
-drkSimon v1.0.2
+drkSimon v1.0.3
 ------------------------------------------------------------------------
 
 Introduction
@@ -53,6 +53,9 @@ vous béneficiez des quatre libertés fondamentales :
 
 Changelog
 ---------
+v1.0.3 : 
+  - Ajout d'un bouton menu pour les apareils n'ayant pas de bouton physique
+
 v1.0.2 : 
   - Correction d'une alerte sur le player Media
 

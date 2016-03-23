@@ -288,7 +288,7 @@ function updateParam() {
  * unbindGame() - supprimer la gestion des evenements
  */ 
 function unbindGame() {
-	$("#simon_menu_front").off("taphold");
+	$("#menub").off("tap");
 	$("#simon_menu_go").off("tap");
 }
 
@@ -297,10 +297,10 @@ function unbindGame() {
  */ 
 function bindGame() {
 	unbindGame();
-	$("#simon_menu_front").on("taphold", function(event) {
+	$("#menub").on("tap", function(event) {
 		event.preventDefault();
 		event.stopPropagation();
-		if (!inthegame && popclosed) closeMenu();
+		if (popclosed) closeMenu();
 	});	
 	$("#simon_menu_go").on("tap", function(event) {
 		event.preventDefault();
