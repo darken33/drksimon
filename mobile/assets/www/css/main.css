@@ -24,7 +24,7 @@ body {
 }
 .text-title {
 	font-family: Times, serif;
-	color: #ff00ff;
+	color: #ffdd00;
 	font-size: 40pt;
 	z-index: 300;
 	margin: 5%;
@@ -35,12 +35,12 @@ body {
 }
 .text-title-2 {
 	font-family: Times, serif;
-	color: #ff00ff;
+	color: #ffdd00;
 	font-size: 40pt;
 }
 .highscore-title {
 	font-size: 12pt; 
-	color: #FFFF00;
+	color: #FFdd00;
 	margin-bottom: 15%;
 }
 .button-go {

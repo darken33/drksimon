@@ -40,6 +40,12 @@ function playSequence() {
 	$('#simon_front').removeClass("blue_on");
 	$('#simon_front').removeClass("yellow_on");
 	$('#simon_front').removeClass("green_on");
+	if (game_options.soundactive) {
+		if (s_snd1 == Media.MEDIA_RUNNING) m_snd1.stop();
+		if (s_snd2 == Media.MEDIA_RUNNING) m_snd2.stop();
+		if (s_snd3 == Media.MEDIA_RUNNING) m_snd3.stop();
+		if (s_snd4 == Media.MEDIA_RUNNING) m_snd4.stop();
+	}
 	setTimeout(function() {
 	if (idx < sequence.length) {
 		switch (sequence[idx]) {
@@ -99,11 +105,11 @@ function startGame() {
 	}
 	else if (game_options.difficulty == 2) {
 		gametimer = 7;
-		intertimer = 750;
+		intertimer = 500;
 	}
 	else {
 		gametimer = 5;
-		intertimer = 500;
+		intertimer = 250;
 	}
 	$.mobile.changePage('#ingame', 'none', true, true);	
 	inthegame = true;
@@ -120,12 +126,12 @@ function startGame() {
  */ 
 function lose() {
 	anim_simon_ko();
+	unbindInGame();
+	stopChrono();
 	setTimeout(function () {
-		stopChrono();
 		inthegame = false;
 		perdu=true;
 		navigator.notification.vibrate(1000);
-		unbindInGame();
 		score();
 	}, buttontimer);
 }
@@ -317,25 +323,36 @@ function anim_simon_ko() {
 
 function anim_button1() {
 	$('#simon_front').addClass("red_on");
-	if (inthegame && game_options.soundactive) m_snd1.play();
+	if (inthegame && game_options.soundactive) {
+		m_snd1.play();
+	}
 }
 
 function anim_button2() {
 	$('#simon_front').addClass("blue_on");
-	if (inthegame && game_options.soundactive) m_snd2.play();
+	if (inthegame && game_options.soundactive) {
+		m_snd2.play();
+	}
 }
 
 function anim_button3() {
 	$('#simon_front').addClass("yellow_on");
-	if (inthegame && game_options.soundactive) m_snd3.play();
+	if (inthegame && game_options.soundactive) {
+		m_snd3.play();
+	}
 }
 
 function anim_button4() {
 	$('#simon_front').addClass("green_on");
-	if (inthegame && game_options.soundactive) m_snd4.play();
+	if (inthegame && game_options.soundactive) {
+		m_snd4.play();
+	}
 }
 
 function button1() {
+	if (game_options.soundactive && s_snd1 == Media.MEDIA_RUNNING) {
+		m_snd1.stop();
+	}
 	anim_button1();
 	setTimeout(function() {
 		$('#simon_front').removeClass("red_on");
@@ -344,6 +361,9 @@ function button1() {
 }
 
 function button2() {
+	if (game_options.soundactive && s_snd2 == Media.MEDIA_RUNNING) {
+		m_snd2.stop();
+	}
 	anim_button2();
 	setTimeout(function() {
 		$('#simon_front').removeClass("blue_on");
@@ -352,6 +372,9 @@ function button2() {
 }
 
 function button3() {
+	if (game_options.soundactive && s_snd3 == Media.MEDIA_RUNNING) {
+		m_snd3.stop();
+	}
 	anim_button3();
 	setTimeout(function() {
 		$('#simon_front').removeClass("yellow_on");
@@ -360,6 +383,9 @@ function button3() {
 }
 
 function button4() {
+	if (game_options.soundactive && s_snd4 == Media.MEDIA_RUNNING) {
+		m_snd4.stop();
+	}
 	anim_button4();
 	setTimeout(function() {
 		$('#simon_front').removeClass("green_on");
@@ -491,7 +517,7 @@ function popup() {
 		popup = '<div data-role="popup" id="splash" class="popup" data-short="Comment Jouer ?" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15" style="background: #a0a0a0;">' + closebtn + header +
 				'<div data-role="content" style="text-align: justify; background: #a0a0a0; color: #000000; text-shadow: none; font-weight: normal; font-size: 70%;">' +
 					'<strong>"menu"</strong> : affiche le menu du jeu (jouer, options, aide, quitter).<br/>'+
-					'<strong>"simon"</strong> : d&eacute;marre la partie.<br/>'+ 
+					'<strong>"Simon"</strong> : d&eacute;marre la partie.<br/>'+ 
 					'<strong>"Le jeu"</strong> : r&eacute;p&eacute;tez les s&eacute;quences propos&eacute;es.<br/>'+
 					'Bonne partie...' +
 				'</div>' +	
@@ -501,8 +527,8 @@ function popup() {
 		popup = '<div data-role="popup" id="splash" class="popup" data-short="Comment Jouer ?" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15" style="background: #a0a0a0;">' + closebtn + header +
 				'<div data-role="content" style="text-align: justify; background: #a0a0a0; color: #000000; text-shadow: none; font-weight: normal; font-size: 90%;">' +
 					'La touche <strong>"menu"</strong>, ou un appui long sur l\'&eacute;cran de votre t&eacute;l&eacute;phone permet d\'afficher le menu du jeu (jouer, options, aide, quitter).<br/>'+
-					'Touchez le <strong>"simon"</strong> pour d&eacute;marrer la partie. Il va alors vous proposer une s&eacute;quence de couleurs qu\'il vous faudra m&eacute;moriser et r&eacute;p&eacute;ter, '+
-					'simon augmente alors la s&eacute;quence d\'une couleur et le jeu continue tant que vous ne faites pas d\'erreur.<br/>' +
+					'Touchez le <strong>Simon</strong> pour d&eacute;marrer la partie. Il va alors vous proposer une s&eacute;quence de couleurs qu\'il vous faudra m&eacute;moriser et r&eacute;p&eacute;ter, '+
+					'<strong>Simon</strong> augmente alors la s&eacute;quence d\'une couleur et le jeu continue tant que vous ne faites pas d\'erreur.<br/>' +
 					'Bonne partie...' +
 				'</div>' +	
 		'</div>';
@@ -511,9 +537,9 @@ function popup() {
 		popup = '<div data-role="popup" id="splash" class="popup" data-short="Comment Jouer ?" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15" style="background: #a0a0a0; top: 30%; bottom: 30%; left: 15%; right: 15%;">' + closebtn + header +
 				'<div data-role="content" style="text-align: justify; background: #a0a0a0; color: #000000; text-shadow: none; font-weight: normal;">' +
 				'<strong>Comment jouer ?</strong><br/>' +
-				'Pour faire appara&icirc;tre le menu il suffit d\'appuyer sur la touche <strong>"menu"</strong>, ou simplement effectuer un appui long sur l\'&eacute;cran, vous pourrez d&eacute;finir le niveau de jeu dans les param&egrave;tres.<br/>' +
-				'Pour d&eacute;marrer une partie, appuyez sur le <strong>"simon"</strong> il faut alors r&eacute;p&eacute;ter les s&eacute;quences de couleurs propos&eacute;es par le jeu. Tant que vous ne faites pas d\'erreur, la s&eacute;quence se voit allong&eacute;e d\'une couleur.<br/>' +
-				'Combien de temps allez vous tenir avant de vous faire avoir par <strong>simon</strong> ?<br/>' +
+				'Pour faire appara&icirc;tre le menu il suffit d\'appuyer sur la touche <strong>"menu"</strong>, ou simplement d\'effectuer un appui long sur l\'&eacute;cran, vous pourrez d&eacute;finir le niveau de jeu dans les param&egrave;tres.<br/>' +
+				'Pour d&eacute;marrer une partie, appuyez sur le <strong>Simon</strong> il faut alors r&eacute;p&eacute;ter les s&eacute;quences de couleurs propos&eacute;es par le jeu. Tant que vous ne faites pas d\'erreur, la s&eacute;quence se voit allong&eacute;e d\'une couleur.<br/>' +
+				'Combien de temps allez vous tenir avant de vous faire avoir par <strong>Simon</strong> ?<br/>' +
 				'Bonne partie...' +
 				'</div>' +	
 		'</div>';	

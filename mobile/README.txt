@@ -1,4 +1,4 @@
-drkSimon v1.0
+drkSimon v1.0.1
 ------------------------------------------------------------------------
 
 Introduction
@@ -53,6 +53,11 @@ vous béneficiez des quatre libertés fondamentales :
 
 Changelog
 ---------
+v1.0.1 : 
+  - Corrections de bugs sur les sons joués
+  - Bug sur les appuis multiples lorsqu'on perd
+  - Correction de fautes d'orthographe
+
 v1.0 : 
   - Première version de drkSimon
   
