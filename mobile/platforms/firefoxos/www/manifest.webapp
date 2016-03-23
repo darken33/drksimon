@@ -1,0 +1,23 @@
+{
+    "launch_path": "/index.html",
+    "installs_allowed_from": [
+        "*"
+    ],
+    "version": "1.4",
+    "name": "drkSimon",
+    "description": "The famous electronic game of th 80's simon as Free Software.",
+    "developer": {
+        "name": "Philippe Bousquet",
+        "url": "http://darken33.free.fr"
+    },
+    "orientation": ["portrait"],
+    "permissions": {
+        "systemXHR": { "description" : "Required to share score on the internet" },
+        "device-storage:sdcard":{"access": "readwrite", "description" : "Required to save options on sdcard" }
+    },
+    "type": "privileged",
+    "icons": {
+        "60": "/icon/icon-60.png",
+        "128": "/icon/icon-128.png"
+    }
+}
