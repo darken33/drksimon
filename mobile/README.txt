@@ -1,4 +1,4 @@
-drkSimon v1.0.3
+drkSimon v1.1
 ------------------------------------------------------------------------
 
 Introduction
@@ -53,6 +53,9 @@ vous béneficiez des quatre libertés fondamentales :
 
 Changelog
 ---------
+v1.1 : 
+  - Internationalisation (Langues Français et Anglais).
+  
 v1.0.3 : 
   - Ajout d'un bouton menu pour les apareils n'ayant pas de bouton physique
 

@@ -78,7 +78,8 @@ function readOptions(_file) {
 			game_options = { "difficulty" : list[0], "name" : list[1], 
 						"helponstart" : (list[2] == "true" ? true : false), 
 						"soundactive" : (list[3] == "true" ? true : false), 
-						"sharescore" : (list[4] == "true" ? true : false) };
+						"sharescore" : (list[4] == "true" ? true : false),
+						"lang" : (list[5] == "en" ? "en" : "fr") };
 		}
         ready_option = true;
    };
@@ -129,7 +130,7 @@ function writeOptions() {
 		function(writer) {
 			var text = game_options.difficulty + '\n' + game_options.name + '\n' + 
 					game_options.helponstart + '\n' + game_options.soundactive + '\n' +	
-					game_options.sharescore;
+					game_options.sharescore + '\n' + game_options.lang;
 			writer.onerror = onFSError;
 			writer.write(text);
 		}, onFSError
@@ -203,6 +204,6 @@ function initOptions() {
 	// Initialisation des parametres
 	game_options = { "difficulty" : 2, "name" : "Player 1", 
 		"helponstart" : true, "soundactive" : true, 
-		"sharescore" : false };
+		"sharescore" : false, "lang" : "en" };
 	new_install = true;
 }

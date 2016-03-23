@@ -5,11 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css">
 		<link rel="stylesheet" href="css/main.css">
+		<script src="js/lang/lang.js" type="text/javascript"></script> 
 		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/jquery-ui-1.8.18.custom.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/jquery.mobile-1.3.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="cordova.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/accel.js" type="text/javascript"></script> 
 		<script src="js/fs.js" type="text/javascript"></script> 
 		<script src="js/sound.js" type="text/javascript"></script> 
 		<script src="js/chrono.js" type="text/javascript"></script> 
@@ -31,16 +31,16 @@
 			* Aide    : Affiche l'aide du jeu
 			* Quitter : Quitte le jeu
 		-->    
-		<div id="menu" class="imenu" style="position: fixed; bottom: 0; width: 100%; background: #000000; opacity:0.9; border-top: 1px #282828 solid; display: none; z-index: 300;" >
+		<div id="menu" class="imenu" style="position: fixed; bottom: 0; width: 100%; background: #000000; opacity:0.9; border-top: 1px #282828 solid; display: none; z-index: 320;" >
 			<table cellspacing="0" cellpadding="0" style="width: 100%; background: none";>
 				<tbody>
 					<tr style="background: none; border-top: 1px #282828 solid;">
-						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid; border-right: 1px #282828 solid;" id="mstart"><div class="icons new icons-size"></div>Jouer</td>
-						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid;" id="mparam"><div class="icons param icons-size"></div>Param&egrave;tres</td>
+						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid; border-right: 1px #282828 solid;" id="mstart"><div class="icons new icons-size"></div><span id="m_txt_jouer">Jouer</span></td>
+						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid;" id="mparam"><div class="icons param icons-size"></div><span id="m_txt_param">Param&egrave;tres</span></td>
 					</tr>
 					<tr style="background: none;">
-						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid; border-right: 1px #282828 solid;" id="mhelp"><div class="icons help icons-size"></div>Aide</td>
-						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid;" id="mquit"><div class="icons quit icons-size"></div>Quitter</td>
+						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid; border-right: 1px #282828 solid;" id="mhelp"><div class="icons help icons-size"></div><span id="m_txt_aide">Aide</span></td>
+						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid;" id="mquit"><div class="icons quit icons-size"></div><span id="m_txt_quitter">Quitter</span></td>
 					</tr>
 				</tbody>
 			</table>	
@@ -83,7 +83,7 @@
 			page de Score
 		-->
 		<div data-role="page" id="score" onclick="quitscore();">
-			<div class="title" style="background: none; position: fixed; top: 5%; width: 100%; font-family: Times, serif;"><p class="text-title">Score</p><p id="scr" class="text-title white">6</p><p id="scr_detail" class="text-title white" style="padding-left: 5%; text-align: left;"></p></div>
+			<div class="title" style="background: none; position: fixed; top: 5%; width: 100%; font-family: Times, serif;"><p class="text-title" id="txt_score">Score</p><p id="scr" class="text-title white">6</p><p id="scr_detail" class="text-title white" style="padding-left: 5%; text-align: left;"></p></div>
 			<div style="background: none; position: fixed; right: 0; bottom: 0; height: 36px; width: 36px;"><div class="icons right icons-size"  onclick="quitscore();"></div></div>
 		</div>		
 
@@ -147,10 +147,10 @@
 		<div data-role="page" id="aide-1" style="background: #fff; color: #000">
 			<div class="help-content">
 				<div class="help-title" style="position: fixed; top:0;">
-					drkSimon v1.0.3<br/>
-					<span class="help-subtitle">Le c&eacute;l&egrave;bre jeu des 80's</span>
+					drkSimon v1.1<br/>
+					<span class="help-subtitle" id="help_subtitle">Le c&eacute;l&egrave;bre jeu des 80's</span>
 				</div>
-				<div class="help-text" style="position: static;">
+				<div class="help-text" style="position: static;" id="help_content">
 				<strong>Introduction</strong><br/>	
 				<strong>drkSimon</strong> est un jeu de m&eacute;moire pour smartphone. Il reprend le principe du c&eacute;l&egrave;bre jeu &eacute;lectronique des ann&eacute;es 80's <strong><a href="http://fr.wikipedia.org/wiki/Simon_%28jeu%29" target="new">Simon</a></strong>.<br/>
 				Ce jeu est d&eacute;velopp&eacute; et maintenu par Philippe Bousquet &lt;darken33@free.fr&gt; depuis octobre 2013 et est distribu&eacute; selon les termes de la <a href="http://www.gnu.org/licenses/gpl.html" target="new">GNU General Public License v3</a>.<br/> 
@@ -175,35 +175,41 @@
 		-->	
 		<div data-role="page" id="param-1" style="background: #000; color: #fff">
 			<div class="help-content">
-				<div class="param-title" style="position: fixed; top:0; padding: 5px; width: 100%; background: #909090; color: #fff; z-index: 999;">
+				<div class="param-title" style="position: fixed; top:0; padding: 5px; width: 100%; background: #909090; color: #fff; z-index: 999;"  id="txt_param">
 					Param&egrave;tres
 				</div>
 				<div data-role="content">
 					<div data-role="fieldcontain">
-						<label for="game_level">Niveau de jeu :</label>
-						<select id="game_level" name="game_level" data-theme="a" data-native-menu="false" tabindex="-1">
+						<label for="game_lang" id="l_game_lang">Langage :</label>
+						<select id="game_lang" name="game_lang" data-theme="a" data-native-menu="true" tabindex="-1" onchange="loading(); updateParam(); param();">
+							<option value="fr">Fran&ccedil;ais</option>
+							<option value="en">Anglais</option>
+						</select>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="game_level" id="l_game_level">Niveau de jeu :</label>
+						<select id="game_level" name="game_level" data-theme="a" data-native-menu="true" tabindex="-1">
 							<option value="1">Facile</option>
 							<option value="2">Moyen</option>
 							<option value="3">Difficile</option>
 						</select>
 					</div>
 					<div data-role="fieldcontain">
-						<label for="game_name">Nom :</label>
-						<input name="game_name" id="game_name" placeholder="Player 1" value="" type="text">
+						<label for="game_name" id="l_game_name">Nom :</label>
+						<input name="game_name" id="game_name" placeholder="Team 1" value="" type="text">
 					</div>
 					<div id="checkboxes1" data-role="fieldcontain">
 						<fieldset data-role="controlgroup" data-type="vertical">
-							<legend>Options :</legend>
-							<input id="game_help" name="game_help" data-theme="a" type="checkbox">
-							<label for="game_help">Aide au d&eacute;marrage</label>
-							<input id="game_sound" name="game_sound" data-theme="a" type="checkbox">
-							<label for="game_sound">Activer les sons</label>
-							<input id="game_score" name="game_score" data-theme="a" type="checkbox">
-							<label for="game_score">Partager le score sur Internet</label>
+							<legend id="l_game_options">Options :</legend>
+							<label><input id="game_help" name="game_help" data-theme="a" type="checkbox"><span id="l_game_help">Aide au d&eacute;marrage</span></label>
+							<label><input id="game_sound" name="game_sound" data-theme="a" type="checkbox"><span id="l_game_sound">Activer les sons</span></label>
+							<label><input id="game_score" name="game_score" data-theme="a" type="checkbox"><span id="l_game_score">Partager le score sur Internet</span></label>
 						</fieldset>
 					</div>
 				</div>    
 			</div>
 		</div>
+		<script src="js/lang/lang.fr.js" type="text/javascript"></script> 
+		<script src="js/lang/lang.en.js" type="text/javascript"></script> 
 	</body>
 </html>

@@ -60,7 +60,7 @@ function startWatch() {
       z: acceleration.z
     }
   }, function onError() {
-    alert('Some problem has occurred in reading the accelerometer.');
+    console.log('Some problem has occurred in reading the accelerometer.');
   }, options);
 }
  

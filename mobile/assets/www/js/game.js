@@ -154,7 +154,8 @@ function playAnimMenu() {
  * score() - affiche le score obtenu
  */ 
 function score() {
-	$("#scr").html(game_options.name +"<br/>" + nb_games +" notes<br/>"+ g_score+"<br/>");
+	$("#txt_score").html(texte_hsc_score[game_options.lang]);
+	$("#scr").html(game_options.name +"<br/>" + nb_games +" "+texte_hsc_notes[game_options.lang]+"<br/>"+ g_score+"<br/>");
 	updateHighscore(nb_games, g_score);
 	if (game_options.sharescore) {
 		service(nb_games, g_score);
@@ -245,7 +246,7 @@ function quit() {
 	if ($("#menu").is(':visible')) {
 		$("#menu").hide();
 	}
-	if (confirm("Voulez vous quitter jeu ?")) {
+	if (confirm(texte_alert_quitter[game_options.lang])) {
 		navigator.app.exitApp();
 	}
 }
@@ -254,21 +255,41 @@ function quit() {
  * aide() - afficher la page d'aide
  */ 
 function aide() {
+	$("#help_subtitle").html(texte_sous_titre[game_options.lang]);
+	$("#help_content").html(texte_aide_content[game_options.lang]);
 	$.mobile.changePage('#aide-1', 'none', true, true);
+}
+
+function loading() {
+	$.mobile.changePage('#loading', 'none', true, true);
 }
 
 /**
  * param() - afficher la page des paramètres
  */ 
 function param() {
-	game_diff = '<option value="1" '+(game_options.difficulty == 1 ? 'selected="selected"' : '')+'>Facile</option>';
-	game_diff += '<option value="2" '+(game_options.difficulty == 2 ? 'selected="selected"' : '')+'>Moyen</option>';
-	game_diff += '<option value="3" '+(game_options.difficulty == 3 ? 'selected="selected"' : '')+'>Difficile</option>';
-	$('#game_level').html(game_diff);
+	$('#txt_param').html(texte_param_title[game_options.lang]);
+	game_lang = '<option value="fr" '+(game_options.lang == "fr" ? 'selected="selected"' : '')+'>'+texte_option_langue_fr[game_options.lang]+'</option>';
+	game_lang += '<option value="en" '+(game_options.lang == "en" ? 'selected="selected"' : '')+'>'+texte_option_langue_en[game_options.lang]+'</option>';
+	$('#l_game_lang').html(texte_option_langage[game_options.lang]);
+	$('#game_lang').html(game_lang).selectmenu().selectmenu("refresh");
+	game_diff = '<option value="1" '+(game_options.difficulty == 1 ? 'selected="selected"' : '')+'>'+texte_difficulte_facile[game_options.lang]+'</option>';
+	game_diff += '<option value="2" '+(game_options.difficulty == 2 ? 'selected="selected"' : '')+'>'+texte_difficulte_moyen[game_options.lang]+'</option>';
+	game_diff += '<option value="3" '+(game_options.difficulty == 3 ? 'selected="selected"' : '')+'>'+texte_difficulte_difficile[game_options.lang]+'</option>';
+	$('#l_game_level').html(texte_niveau[game_options.lang]);
+	$('#game_level').html(game_diff).selectmenu().selectmenu("refresh");
+	$('#l_game_name').html(texte_nom[game_options.lang]);
 	$('#game_name').val(game_options.name);
-	if (game_options.helponstart) $('#game_help').attr('checked', "checked");
-	if (game_options.soundactive) $('#game_sound').attr('checked', "checked");
-	if (game_options.sharescore) $('#game_score').attr('checked', "checked");
+	$('#l_options').html(texte_options[game_options.lang]);
+	$('#l_game_help').html(texte_option_aide[game_options.lang]);
+	$('#l_game_sound').html(texte_option_sons[game_options.lang]);
+	$('#l_game_score').html(texte_option_share[game_options.lang]);
+	if (game_options.helponstart) $('#game_help').attr('checked', true);
+	if (game_options.soundactive) $('#game_sound').attr('checked', true);
+	if (game_options.sharescore) $('#game_score').attr('checked', true);
+	$('#game_sound').checkboxradio().checkboxradio("refresh");
+	$('#game_help').checkboxradio().checkboxradio("refresh");
+	$('#game_score').checkboxradio().checkboxradio("refresh");
 	$.mobile.changePage('#param-1', 'none', true, true);
 }
 
@@ -276,12 +297,21 @@ function param() {
  * updateparam() - MAJ des paramètres
  */ 
 function updateParam() {
+	game_options.lang = $('#game_lang').val();
 	game_options.difficulty = $('#game_level').val();
 	game_options.name = $('#game_name').val(); 
 	game_options.helponstart = ($('#game_help').attr('checked') == "checked");
 	game_options.soundactive = ($('#game_sound').attr('checked') == "checked");
 	game_options.sharescore = ($('#game_score').attr('checked') == "checked");
 	writeOptions();
+	updateMenu();
+}
+
+function updateMenu() {
+	$('#m_txt_jouer').html(texte_menu_jouer[game_options.lang]);
+	$('#m_txt_param').html(texte_menu_param[game_options.lang]);
+	$('#m_txt_aide').html(texte_menu_aide[game_options.lang]);
+	$('#m_txt_quitter').html(texte_menu_quitter[game_options.lang]);
 }
 
 /**
@@ -484,6 +514,7 @@ var onDeviceReady = function() {
 			initOptions();
 			initHighscores();	
 		}
+		updateMenu();
 		$.mobile.changePage('#game', 'none', true, true);
 		inthegame = false;
 		bindGame();	
@@ -515,34 +546,18 @@ function popup() {
 	popup = '';
 	if ($(window).width() < 320) {
 		popup = '<div data-role="popup" id="splash" class="popup" data-short="Comment Jouer ?" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15" style="background: #a0a0a0;">' + closebtn + header +
-				'<div data-role="content" style="text-align: justify; background: #a0a0a0; color: #000000; text-shadow: none; font-weight: normal; font-size: 70%;">' +
-					'<strong>"menu"</strong> : affiche le menu du jeu (jouer, options, aide, quitter).<br/>'+
-					'<strong>"Simon"</strong> : d&eacute;marre la partie.<br/>'+ 
-					'<strong>"Le jeu"</strong> : r&eacute;p&eacute;tez les s&eacute;quences propos&eacute;es.<br/>'+
-					'Bonne partie...' +
-				'</div>' +	
-		'</div>';
+				texte_popup_mini[game_options.lang] + 
+				'</div>';
 	}
 	else if ($(window).width() < 480) {
 		popup = '<div data-role="popup" id="splash" class="popup" data-short="Comment Jouer ?" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15" style="background: #a0a0a0;">' + closebtn + header +
-				'<div data-role="content" style="text-align: justify; background: #a0a0a0; color: #000000; text-shadow: none; font-weight: normal; font-size: 90%;">' +
-					'La touche <strong>"menu"</strong>, ou un appui long sur l\'&eacute;cran de votre t&eacute;l&eacute;phone permet d\'afficher le menu du jeu (jouer, options, aide, quitter).<br/>'+
-					'Touchez le <strong>Simon</strong> pour d&eacute;marrer la partie. Il va alors vous proposer une s&eacute;quence de couleurs qu\'il vous faudra m&eacute;moriser et r&eacute;p&eacute;ter, '+
-					'<strong>Simon</strong> augmente alors la s&eacute;quence d\'une couleur et le jeu continue tant que vous ne faites pas d\'erreur.<br/>' +
-					'Bonne partie...' +
-				'</div>' +	
-		'</div>';
+				texte_popup_normal[game_options.lang] + 
+				'</div>';
 	}
 	else {
 		popup = '<div data-role="popup" id="splash" class="popup" data-short="Comment Jouer ?" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15" style="background: #a0a0a0; top: 30%; bottom: 30%; left: 15%; right: 15%;">' + closebtn + header +
-				'<div data-role="content" style="text-align: justify; background: #a0a0a0; color: #000000; text-shadow: none; font-weight: normal;">' +
-				'<strong>Comment jouer ?</strong><br/>' +
-				'Pour faire appara&icirc;tre le menu il suffit d\'appuyer sur la touche <strong>"menu"</strong>, ou simplement d\'effectuer un appui long sur l\'&eacute;cran, vous pourrez d&eacute;finir le niveau de jeu dans les param&egrave;tres.<br/>' +
-				'Pour d&eacute;marrer une partie, appuyez sur le <strong>Simon</strong> il faut alors r&eacute;p&eacute;ter les s&eacute;quences de couleurs propos&eacute;es par le jeu. Tant que vous ne faites pas d\'erreur, la s&eacute;quence se voit allong&eacute;e d\'une couleur.<br/>' +
-				'Combien de temps allez vous tenir avant de vous faire avoir par <strong>Simon</strong> ?<br/>' +
-				'Bonne partie...' +
-				'</div>' +	
-		'</div>';	
+				texte_popup_grand[game_options.lang] + 
+				'</div>';	
 	}
 
 	// Create the popup. Trigger "pagecreate" instead of "create" because currently the framework doesn't bind the enhancement of toolbars to the "create" event (js/widgets/page.sections.js).

@@ -31,8 +31,8 @@ function updateHighscore(passe, score) {
 }
 
 function fillHighscoreLocHtml(passe, score) {
-	document.getElementById("hst_loc").innerHTML = "Meilleurs Scores : " + (game_options.difficulty == 1 ? "Facile" : (game_options.difficulty == 2 ? "Moyen" : "Difficile"));
-	var tableScore = '<tr><th style="text-align: right;">#</th><th style="text-align: left;">Nom</th><th style="text-align: right;">Notes</th><th style="text-align: right;">Score</th></tr>';
+	document.getElementById("hst_loc").innerHTML = texte_meilleur_score_local[game_options.lang] + (game_options.difficulty == 1 ? texte_difficulte_facile[game_options.lang] : (game_options.difficulty == 2 ? texte_difficulte_moyen[game_options.lang] : texte_difficulte_difficile[game_options.lang]));
+	var tableScore = '<tr><th style="text-align: right;">#</th><th style="text-align: left;">'+texte_hsc_nom[game_options.lang]+'</th><th style="text-align: right;">'+texte_hsc_notes[game_options.lang]+'</th><th style="text-align: right;">'+texte_hsc_score[game_options.lang]+'</th></tr>';
 	var tabscores = (game_options.difficulty == 1 ? game_highscores.facile : (game_options.difficulty == 2 ? game_highscores.moyen : game_highscores.difficile));
 	var hlgt = false;
 	for (i=0; i<10; i++) {
@@ -79,7 +79,8 @@ function quithsci() {
 }
 
 function service(passes, score) {
-	var tableScore = "<tr><td>Chargement, veuillez patienter...</td></tr>";
+	document.getElementById("hst_int").innerHTML = texte_meilleur_score_mondial[game_options.lang] + (game_options.difficulty == 1 ? texte_difficulte_facile[game_options.lang] : (game_options.difficulty == 2 ? texte_difficulte_moyen[game_options.lang] : texte_difficulte_difficile[game_options.lang]));
+	var tableScore = "<tr><td>"+texte_loading[game_options.lang]+"</td></tr>";
 	document.getElementById("hsc_int").innerHTML = tableScore;
 	var key = "4500bf2526b386d005beda71018bf881";
 	var difficulty = game_options.difficulty;
@@ -90,14 +91,14 @@ function service(passes, score) {
 	$.getJSON(url, function(data) {
 		fillHighscoreIntHtml(data);
 	}).fail(function() { 
-		var tableScore = '<tr><td style="color: #FF0000">Impossible de charger les scores<br/>V&eacute;rifiez votre connexion Internet...</td></tr>';
+		var tableScore = '<tr><td style="color: #FF0000">'+texte_erreur_chargement_score[game_options.lang]+'</td></tr>';
 		document.getElementById("hsc_int").innerHTML = tableScore;
 	});
 }		
 
 function fillHighscoreIntHtml(data) {
-	document.getElementById("hst_int").innerHTML = "Meilleurs Scores Mondiaux : " + (game_options.difficulty == 1 ? "Facile" : (game_options.difficulty == 2 ? "Moyen" : "Difficile"));
-	var tableScore = '<tr><th style="text-align: right;">#</th><th style="text-align: left;">Nom</th><th style="text-align: right;">Notes</th><th style="text-align: right;">Score</th></tr>';
+	document.getElementById("hst_int").innerHTML = texte_meilleur_score_mondial[game_options.lang] + (game_options.difficulty == 1 ? texte_difficulte_facile[game_options.lang] : (game_options.difficulty == 2 ? texte_difficulte_moyen[game_options.lang] : texte_difficulte_difficile[game_options.lang]));
+	var tableScore = '<tr><th style="text-align: right;">#</th><th style="text-align: left;">'+texte_hsc_nom[game_options.lang]+'</th><th style="text-align: right;">'+texte_hsc_notes[game_options.lang]+'</th><th style="text-align: right;">'+texte_hsc_score[game_options.lang]+'</th></tr>';
 	var tabscores = data;
 	for (i=0; i<10; i++) {
 		if (i < tabscores.length) {
