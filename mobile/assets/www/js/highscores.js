@@ -81,7 +81,7 @@ function quithsci() {
 function service(passes, score) {
 	var tableScore = "<tr><td>Chargement, veuillez patienter...</td></tr>";
 	document.getElementById("hsc_int").innerHTML = tableScore;
-	var key = "";
+	var key = "4500bf2526b386d005beda71018bf881";
 	var difficulty = game_options.difficulty;
 	var name = game_options.name;
 	var passe = passes;

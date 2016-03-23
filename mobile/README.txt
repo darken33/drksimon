@@ -1,4 +1,4 @@
-drkSimon v1.0.1
+drkSimon v1.0.2
 ------------------------------------------------------------------------
 
 Introduction
@@ -53,6 +53,9 @@ vous béneficiez des quatre libertés fondamentales :
 
 Changelog
 ---------
+v1.0.2 : 
+  - Correction d'une alerte sur le player Media
+
 v1.0.1 : 
   - Corrections de bugs sur les sons joués
   - Bug sur les appuis multiples lorsqu'on perd

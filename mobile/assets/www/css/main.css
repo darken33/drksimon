@@ -265,6 +265,9 @@ table.highscore td {
 	#simon, #simon_led, #simon_menu, #simon_front, #simon_menu_front {
 		background-size: 800px 800px;
 	}
+	#hsc_loc, #hsc_int {
+		font-size: 150%; 
+	}
 	.text-title {
 		font-size: 80pt;
 	}
@@ -274,6 +277,18 @@ table.highscore td {
 	}
 	.text-title-2 {
 		font-size: 80pt;
+	}
+	.highscore-title {
+		font-size: 20pt; 
+	}
+	.help-content {
+		padding-top: 100px;	
+	}
+	.help-title {
+		font-size: 20pt; 
+	}
+	.help-subtitle {
+		font-size: 15pt; 
 	}
 }
 @media only screen and (max-width: 1024px) {

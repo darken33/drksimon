@@ -21,7 +21,6 @@ function isSoundReady() {
 }
 
 function soundErr(err) {
-	alert(err);
 }
 
 function loadSounds() {
