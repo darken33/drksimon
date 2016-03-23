@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>drkSimon</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-ui-1.8.18.custom.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.mobile-1.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="cordova.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/accel.js" type="text/javascript"></script> 
+		<script src="js/fs.js" type="text/javascript"></script> 
+		<script src="js/sound.js" type="text/javascript"></script> 
+		<script src="js/chrono.js" type="text/javascript"></script> 
+		<script src="js/highscores.js" type="text/javascript"></script> 
+		<script src="js/game.js" type="text/javascript"></script> 
+	</head>
+	<body onload="init();">
+
+		<!-- 
+			page de Chargement
+		-->
+		<div data-role="page" id="loading">
+			<div data-role="content">&nbsp;</div>	
+		</div>		
+
+		<!-- 
+			Le menu de l'application 
+			* Nouveau : Lance une nouvelle partie
+			* Aide    : Affiche l'aide du jeu
+			* Quitter : Quitte le jeu
+		-->    
+		<div id="menu" class="imenu" style="position: fixed; bottom: 0; width: 100%; background: #000000; opacity:0.9; border-top: 1px #282828 solid; display: none; z-index: 300;" >
+			<table cellspacing="0" cellpadding="0" style="width: 100%; background: none";>
+				<tbody>
+					<tr style="background: none; border-top: 1px #282828 solid;">
+						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid; border-right: 1px #282828 solid;" id="mstart"><div class="icons new icons-size"></div>Jouer</td>
+						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid;" id="mparam"><div class="icons param icons-size"></div>Param&egrave;tres</td>
+					</tr>
+					<tr style="background: none;">
+						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid; border-right: 1px #282828 solid;" id="mhelp"><div class="icons help icons-size"></div>Aide</td>
+						<td class="menu" style="width: 50%; background: none; border-top: 1px #282828 solid;" id="mquit"><div class="icons quit icons-size"></div>Quitter</td>
+					</tr>
+				</tbody>
+			</table>	
+		</div>
+
+		<!--
+			page principale
+		-->	
+		<div data-role="page" id="game">
+
+			<!--
+				Le titre
+			-->	
+			<div class="title" style="background: none; position: fixed; top: 0; width: 100%; font-family: Times, serif;"><p class="text-title">drkSimon</p></div>
+			<!-- 
+				Le jeu Simon
+			-->
+			<div id="simon_menu"><div id="simon_menu_front"><div id="simon_menu_go">&nbsp;</div></div></div>
+			<!--
+				L'ancre du menu
+			-->
+			<div style="position: fixed; bottom: 0; width: 100%; height: 2px; z-index: 285;" onmouseover="closeMenu();"></div>
+		</div>
+
+		<!--
+			page principale
+		-->	
+		<div data-role="page" id="ingame">
+			<!-- 
+				Le jeu Simon
+			-->
+			<div id="simon"><div id="simon_led"><div id="simon_front">&nbsp;</div></div></div>
+			<div id="button1"></div>
+			<div id="button2"></div>
+			<div id="button3"></div>
+			<div id="button4"></div>
+		</div>
+
+		<!-- 
+			page de Score
+		-->
+		<div data-role="page" id="score" onclick="quitscore();">
+			<div class="title" style="background: none; position: fixed; top: 5%; width: 100%; font-family: Times, serif;"><p class="text-title">Score</p><p id="scr" class="text-title white">6</p><p id="scr_detail" class="text-title white" style="padding-left: 5%; text-align: left;"></p></div>
+			<div style="background: none; position: fixed; right: 0; bottom: 0; height: 36px; width: 36px;"><div class="icons right icons-size"  onclick="quitscore();"></div></div>
+		</div>		
+
+		<!--
+			page higscores locaux
+		-->	
+		<div data-role="page" id="hsc_local" onclick="quithscl();">
+			<!-- 
+				Le Tableau des scores
+			-->	
+			<div class="text-title-2">drkBomb</div>
+			<div id="hst_loc" class="highscore-title" >Meilleurs Scores : Facile</div>
+			<div>
+				<table  id="hsc_loc" class="highscore">
+					<tr><th style="text-align: right;">#</th><th style="text-align: left;">Nom</th><th style="text-align: right;">Notes</th><th style="text-align: right;">Score</th></tr>
+					<tr><td style="text-align: right;">1.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">2.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">3.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">4.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">5.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">6.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">7.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">8.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">9.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">10.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+				</table>
+			</div>
+			<div style="background: none; position: fixed; right: 0; bottom: 0; height: 36px; width: 36px;"><div class="icons right icons-size" onclick="quithscl();"></div></div>
+		</div>
+		
+		<!--
+			page highscores mondiaux
+		-->	
+		<div data-role="page" id="hsc_internet"  onclick="quithsci();">
+			<!-- 
+				Le Tableau des scores
+			-->	
+			<div class="text-title-2">drkSimon</div>
+			<div id="hst_int" class="highscore-title" >Meilleurs Scores Mondiaux : Facile</div>
+			<div>
+				<table id="hsc_int" class="highscore">
+					<tr><th style="text-align: right;">#</th><th style="text-align: left;">Nom</th><th style="text-align: right;">Notes</th><th style="text-align: right;">Score</th></tr>
+					<tr><td style="text-align: right;">1.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">2.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">3.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">4.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">5.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">6.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">7.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">8.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">9.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+					<tr><td style="text-align: right;">10.</td><td style="text-align: left;">Player 1</td><td style="text-align: right;">63</td><td style="text-align: right;">12158</td></tr>
+				</table>
+			</div>
+			<div style="background: none; position: fixed; right: 0; bottom: 0; height: 36px; width: 36px;"><div class="icons right icons-size" onclick="quithsci();"></div></div>
+		</div>
+
+		<!--
+			page d'aide
+		-->	
+		<div data-role="page" id="aide-1" style="background: #fff; color: #000">
+			<div class="help-content">
+				<div class="help-title" style="position: fixed; top:0;">
+					drkSimon v1.0<br/>
+					<span class="help-subtitle">Le c&eacute;l&egrave;bre jeu des 80's</span>
+				</div>
+				<div class="help-text" style="position: static;">
+				<strong>Introduction</strong><br/>	
+				<strong>drkSimon</strong> est un jeu de m&eacute;moire pour smartphone. Il reprend le principe du c&eacute;l&egrave;bre jeu &eacute;lectronique des ann&eacute;es 80's <strong><a href="http://fr.wikipedia.org/wiki/Simon_%28jeu%29" target="new">Simon</a></strong>.<br/>
+				Ce jeu est d&eacute;velopp&eacute; et maintenu par Philippe Bousquet &lt;darken33@free.fr&gt; depuis octobre 2013 et est distribu&eacute; selon les termes de la <a href="http://www.gnu.org/licenses/gpl.html" target="new">GNU General Public License v3</a>.<br/> 
+				Les graphismes ont &eacute;t&eacute; r&eacute;alis&eacute; par Philippe Bousquet et sont distribu&eacute;s sous licence <a href="http://creativecommons.org/licenses/by-sa/3.0/fr/" target="new">Creative Commons BY-SA</a>.<br/>
+				Les effets sonores ont quant &agrave; eux &eacute;t&eacute; r&eacute;alis&eacute; au travers de logiciels libres tels que Jackd, Qsynth et Audacity, et sont &eacute;galement distribu&eacute;s sous licence <a href="http://creativecommons.org/licenses/by-sa/3.0/fr/" target="new">Creative Commons BY-SA</a>.<br/>
+				Pour plus d'informations et suivre l'actualit&eacute; de ce jeu veuillez vous rendre sur <a href="http://darken33.free.fr/wordpress/?p=762" target="new">la page Web drkSimon</a>.    
+				<p/>
+				<strong>Comment jouer ?</strong><br/>
+				Pour faire appara&icirc;tre le menu il suffit d'appuyer sur la touche <strong>"menu"</strong>, ou simplement effectuer un appui long sur l'&eacute;cran, vous pourrez d&eacute;finir le niveau de jeu dans les param&egrave;tres.<br/>
+				Pour d&eacute;marrer une partie, appuyez sur le <strong>"simon"</strong> il faut alors r&eacute;p&eacute;ter les s&eacute;quences de couleurs propos&eacute;es par le jeu. Tant que vous ne faites pas d'erreur, la s&eacute;quence se voit allong&eacute;e d'une couleur.<br/>
+				Combien de temps allez vous tenir avant de vous faire avoir par <strong>simon</strong> ?<br/>
+				Bonne partie...
+				<p/>
+				<strong>Comment aider ?</strong><br/>
+				Ce jeu est pr&eacute;vu pour fonctionner sur une majorit&eacute; de machines (tablettes ou smartphones). <a href="http://darken33.free.fr/wordpress/?p=762" target="new">Mon site web</a> indique les machines pour lesquelles le fonctionnement du jeu a &eacute;t&eacute; valid&eacute;. Si vous testez cette application sur une machine non mentionn&eacute;e sur le site, je vous serais reconnaissant de me laisser un petit message m'indiquant sur quelle machine vous avez test&eacute; le jeu.<br/>
+				Dans le cas o&ugrave; le jeu ne fonctionnerait pas correctement, vous pouvez &eacute;galement me laisser un message en m'indiquant votre machine et votre r&eacute;solution d'&eacute;cran afin que j'am&eacute;liore le jeu.<br/>
+				</div>
+			</div>
+		</div>
+		<!--
+			page de paramètres
+		-->	
+		<div data-role="page" id="param-1" style="background: #000; color: #fff">
+			<div class="help-content">
+				<div class="param-title" style="position: fixed; top:0; padding: 5px; width: 100%; background: #909090; color: #fff; z-index: 999;">
+					Param&egrave;tres
+				</div>
+				<div data-role="content">
+					<div data-role="fieldcontain">
+						<label for="game_level">Niveau de jeu :</label>
+						<select id="game_level" name="game_level" data-theme="a" data-native-menu="false" tabindex="-1">
+							<option value="1">Facile</option>
+							<option value="2">Moyen</option>
+							<option value="3">Difficile</option>
+						</select>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="game_name">Nom :</label>
+						<input name="game_name" id="game_name" placeholder="Player 1" value="" type="text">
+					</div>
+					<div id="checkboxes1" data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="vertical">
+							<legend>Options :</legend>
+							<input id="game_help" name="game_help" data-theme="a" type="checkbox">
+							<label for="game_help">Aide au d&eacute;marrage</label>
+							<input id="game_sound" name="game_sound" data-theme="a" type="checkbox">
+							<label for="game_sound">Activer les sons</label>
+							<input id="game_score" name="game_score" data-theme="a" type="checkbox">
+							<label for="game_score">Partager le score sur Internet</label>
+						</fieldset>
+					</div>
+				</div>    
+			</div>
+		</div>
+	</body>
+</html>
