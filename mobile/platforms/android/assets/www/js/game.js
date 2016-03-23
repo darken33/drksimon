@@ -7,7 +7,7 @@
  * 
  * This software is under GNU General Public License
  */
-var game_version  = "1.3";
+var game_version  = "1.4";
 var navplay = false;
 var ready = false;
 var popclosed = false;
@@ -298,6 +298,11 @@ function aide() {
 	$.mobile.changePage('#aide-1', 'none', true, true);
 }
 
+function dons() {
+	$("#dons_content").html(texte_dons_content[game_options.lang]);
+	$.mobile.changePage('#dons', 'none', true, true);
+}
+
 function loading() {
 	$.mobile.changePage('#loading', 'none', true, true);
 }
@@ -309,6 +314,7 @@ function param() {
 	$('#txt_param').html(texte_param_title[game_options.lang]);
 	game_lang = '<option value="fr" '+(game_options.lang == "fr" ? 'selected="selected"' : '')+'>'+texte_option_langue_fr[game_options.lang]+'</option>';
 	game_lang += '<option value="en" '+(game_options.lang == "en" ? 'selected="selected"' : '')+'>'+texte_option_langue_en[game_options.lang]+'</option>';
+	game_lang += '<option value="es" '+(game_options.lang == "es" ? 'selected="selected"' : '')+'>'+texte_option_langue_es[game_options.lang]+'</option>';
 	$('#l_game_lang').html(texte_option_langage[game_options.lang]);
 	$('#game_lang').html(game_lang).selectmenu().selectmenu("refresh");
 	game_diff = '<option value="1" '+(game_options.difficulty == 1 ? 'selected="selected"' : '')+'>'+texte_difficulte_facile[game_options.lang]+'</option>';
@@ -350,6 +356,7 @@ function updateMenu() {
 	$('#m_txt_param').html(texte_menu_param[game_options.lang]);
 	$('#m_txt_aide').html(texte_menu_aide[game_options.lang]);
 	$('#m_txt_quitter').html(texte_menu_quitter[game_options.lang]);
+	$('#m_txt_dons').html(texte_menu_dons[game_options.lang]);
 }
 
 /**
@@ -366,6 +373,7 @@ function unbindGame() {
 	$("#b_score").off("tap");
 	$("#b_hsc_local").off("tap");
 	$("#b_hsc_internet").off("tap");
+	$("#dons_back").off("tap");
 }
 
 /**
@@ -422,6 +430,11 @@ function bindGame() {
 		event.preventDefault();
 		event.stopPropagation();
 		quithsci();
+	});
+	$("#dons_back").on("tap",  function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		onBackButton();
 	});
 }
 
@@ -566,6 +579,12 @@ function bindMenu() {
 		event.stopPropagation();
 		quit(); 
 	});
+	$("#mdons").on("tap", function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		dons(); 
+		closeMenu();
+	});
 }
 
 /**
@@ -588,7 +607,7 @@ function closepop() {
 }
 
 function popup() {
-	header = '<div data-role="header"><h2>Aide</h2></div>',
+	header = '<div data-role="header"><h2>'+texte_aide_title[game_options.lang]+'</h2></div>',
 	closebtn = "",
 	popup = '';
 	if ($(window).width() < 320) {

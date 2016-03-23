@@ -80,7 +80,7 @@ function readOptions(_file) {
 						"helponstart" : (list[2] == "true" ? true : false), 
 						"soundactive" : (list[3] == "true" ? true : false), 
 						"sharescore" : (list[4] == "true" ? true : false),
-						"lang" : (list[5] == "en" ? "en" : "fr") };
+						"lang" : (list[5] == "" || list[5] == null ? "en" : list[5]) };
 		}
         ready_option = true;
 		activateApp();

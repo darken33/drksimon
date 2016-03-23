@@ -1,4 +1,4 @@
-drkSimon v1.3
+drkSimon v1.4
 ------------------------------------------------------------------------
 
 Introduction
@@ -53,6 +53,8 @@ vous béneficiez des quatre libertés fondamentales :
 
 Changelog
 ---------
+v1.4 : 
+  - Support de la langue Espagnole.
 v1.3 : 
   - Amélioration du design des boutons et boites de dialogues.
   - Support de FirefoxOS

@@ -32,3 +32,6 @@ var texte_option_langage = new Array();
 var texte_option_langue_fr = new Array();
 var texte_option_langue_en = new Array();
 var texte_loading = new Array();
+var texte_dons_content = new Array();
+var texte_menu_dons = new Array();
+var texte_option_langue_es = new Array();
