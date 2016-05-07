@@ -49,6 +49,9 @@
         },
         "org.apache.cordova.vibration": {
             "PACKAGE_NAME": "fr.free.darken33.games.drksimon"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "fr.free.darken33.games.drksimon"
         }
     },
     "dependent_plugins": {}

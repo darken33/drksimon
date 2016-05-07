@@ -1,4 +1,4 @@
-drkSimon v1.4
+drkSimon v1.5
 ------------------------------------------------------------------------
 
 Introduction
@@ -53,8 +53,13 @@ vous béneficiez des quatre libertés fondamentales :
 
 Changelog
 ---------
+v1.5 : 
+  - Migration cordova suite à une alerte de securité
+  - Service REST migré vers http://darken33.net
+
 v1.4 : 
   - Support de la langue Espagnole.
+
 v1.3 : 
   - Amélioration du design des boutons et boites de dialogues.
   - Support de FirefoxOS

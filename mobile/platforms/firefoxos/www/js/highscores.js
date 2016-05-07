@@ -87,7 +87,7 @@ function service(passes, score) {
 	var name = game_options.name;
 	var passe = passes;
 	var score = score;
-	var url = "http://darken33.free.fr/drksimon/services/rest_service.php?key="+key+"&difficulty="+difficulty+"&name="+name+"&passe="+passe+"&score="+score;
+	var url = "http://darken33.net/applications/services/drksimon/rest_service.php?key="+key+"&difficulty="+difficulty+"&name="+name+"&passe="+passe+"&score="+score;
 	$.getJSON(url, function(data) {
 		fillHighscoreIntHtml(data);
 	}).fail(function() { 

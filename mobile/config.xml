@@ -1,12 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="fr.free.darken33.games.drksimon" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="fr.free.darken33.games.drksimon" version="1.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>drkSimon</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        The famous electronic game of the 80’s.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="darken33@free.fr" href="http://darken33.net/wp/index.php/2013/10/11/drksimon-the-famous-electronic-game-of-the-80s/">
+        Philippe Bousquet
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <engine name="android" spec="~5.1.1" />
+    <engine name="firefoxos" spec="~3.6.3" />
 </widget>

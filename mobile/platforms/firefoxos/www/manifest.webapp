@@ -3,12 +3,12 @@
     "installs_allowed_from": [
         "*"
     ],
-    "version": "1.4",
+    "version": "1.5",
     "name": "drkSimon",
-    "description": "The famous electronic game of th 80's simon as Free Software.",
+    "description": "The famous electronic game of the 80’s.",
     "developer": {
         "name": "Philippe Bousquet",
-        "url": "http://darken33.free.fr"
+        "url": "http://darken33.net/wp/index.php/2013/10/11/drksimon-the-famous-electronic-game-of-the-80s/"
     },
     "orientation": ["portrait"],
     "permissions": {

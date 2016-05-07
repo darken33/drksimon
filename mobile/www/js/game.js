@@ -7,7 +7,7 @@
  * 
  * This software is under GNU General Public License
  */
-var game_version  = "1.4";
+var game_version  = "1.5";
 var navplay = false;
 var ready = false;
 var popclosed = false;
